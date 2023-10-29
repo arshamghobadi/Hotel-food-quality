@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -31,10 +32,13 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 type Input = z.infer<typeof survaySchema>;
 
 const CardSurvey = () => {
   const [formStep, setFormStep] = useState(0);
+  const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<Input>({
     resolver: zodResolver(survaySchema),
     defaultValues: {
@@ -46,6 +50,12 @@ const CardSurvey = () => {
   });
 
   function onSubmit(data: Input) {
+    toast({
+      title: 'Thanks for feedback',
+    });
+    router.refresh();
+    form.reset();
+    setFormStep(0);
     console.log(data);
   }
   return (
@@ -175,13 +185,16 @@ const CardSurvey = () => {
                     const roomState = form.getFieldState('room');
                     const foodState = form.getFieldState('food');
                     const qualityState = form.getFieldState('quality');
-                    if (formStep === 0 && !nameState.invalid) {
+                    if (
+                      (formStep === 0 && nameState.invalid) ||
+                      !nameState.isDirty
+                    ) {
                       return;
-                    } else if (formStep === 1 && !roomState.invalid) {
+                    } else if (formStep === 1 && roomState.invalid) {
                       return;
-                    } else if (formStep === 2 && !foodState.invalid) {
+                    } else if (formStep === 2 && foodState.invalid) {
                       return;
-                    } else if (formStep === 3 && !qualityState.invalid) {
+                    } else if (formStep === 3 && qualityState.invalid) {
                       return;
                     }
                     setFormStep(formStep + 1);
