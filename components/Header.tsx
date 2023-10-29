@@ -1,19 +1,20 @@
 import Link from 'next/link';
 
 import { UserButton, auth, currentUser } from '@clerk/nextjs';
+import Image from 'next/image';
 const Header = async () => {
   const user = await currentUser();
   const { userId }: { userId: string | null } = auth();
 
   return (
     <div
-      className="w-full bg-blue-500 py-4 px-6 flex
+      className="w-full max-w-5xl mx-auto  px-6 flex
       items-center justify-between mb-5"
     >
-      <div>Bestwestern</div>
+      <Image src="/image/logo.jpg" alt="logo" width={100} height={50} />
       <div className="flex items-center space-x-3 text-yellow-50">
         <UserButton afterSignOutUrl="/" />
-        <div>{user?.firstName}</div>
+        <div className="text-black">{user?.firstName}</div>
       </div>
 
       {!userId && (

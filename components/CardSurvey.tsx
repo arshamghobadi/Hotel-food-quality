@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { motion } from 'framer-motion';
 import {
   Card,
   CardContent,
@@ -74,8 +75,18 @@ const CardSurvey = () => {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-4 relative overflow-x-hidden"
+            >
+              <motion.div
+                animate={{
+                  translateX: `-${formStep * 100}%`,
+                }}
+                transition={{
+                  ease: 'easeInOut',
+                  duration: 0.5,
+                }}
                 className={cn('', {
                   hidden: formStep !== 0,
                 })}
@@ -93,8 +104,15 @@ const CardSurvey = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-              <div
+              </motion.div>
+              <motion.div
+                animate={{
+                  translateX: `${100 - formStep * 100}%`,
+                }}
+                transition={{
+                  ease: 'easeInOut',
+                  duration: 0.5,
+                }}
                 className={cn('', {
                   hidden: formStep !== 1,
                 })}
@@ -115,8 +133,15 @@ const CardSurvey = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-              <div
+              </motion.div>
+              <motion.div
+                animate={{
+                  translateX: `${200 - formStep * 100}%`,
+                }}
+                transition={{
+                  ease: 'easeInOut',
+                  duration: 0.5,
+                }}
                 className={cn('', {
                   hidden: formStep !== 2,
                 })}
@@ -134,8 +159,15 @@ const CardSurvey = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-              <div
+              </motion.div>
+              <motion.div
+                animate={{
+                  translateX: `${300 - formStep * 100}%`,
+                }}
+                transition={{
+                  ease: 'easeInOut',
+                  duration: 0.5,
+                }}
                 className={cn('', {
                   hidden: formStep !== 3,
                 })}
@@ -162,7 +194,7 @@ const CardSurvey = () => {
                     </FormItem>
                   )}
                 />
-              </div>
+              </motion.div>
               <div className="flex items-center justify-between">
                 <Button
                   className={cn('', {
