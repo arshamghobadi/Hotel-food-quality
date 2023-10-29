@@ -1,14 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { auth, currentUser } from '@clerk/nextjs';
+import { Input } from '@/components/ui/input';
+import { auth } from '@clerk/nextjs';
+import { Button } from '@/components/ui/button';
 export default async function Home() {
-  const user = await currentUser();
   const { userId }: { userId: string | null } = auth();
-  console.log(user);
 
   return (
     <div>
-      {userId && <div>salam</div>}
+      {userId && (
+        <div
+          className="flex flex-col justify-center items-center space-y-2
+         text-lg"
+        >
+          <h2>PLease inter your Room number</h2>
+          <Input />
+          <div className="flex space-x-4">
+            <Button>Back</Button>
+            <Button>Next</Button>
+          </div>
+        </div>
+      )}
       {!userId && (
         <div className="flex flex-col space-y-3">
           <div className="flex flex-col justify-center items-center p-4 space-y-3">
