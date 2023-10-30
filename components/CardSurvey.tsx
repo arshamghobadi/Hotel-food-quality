@@ -212,23 +212,6 @@ const CardSurvey = () => {
                     hidden: formStep === 3,
                   })}
                   onClick={() => {
-                    form.trigger(['name', 'room', 'food', 'quality']);
-                    const nameState = form.getFieldState('name');
-                    const roomState = form.getFieldState('room');
-                    const foodState = form.getFieldState('food');
-                    const qualityState = form.getFieldState('quality');
-                    if (
-                      (formStep === 0 && nameState.invalid) ||
-                      !nameState.isDirty
-                    ) {
-                      return;
-                    } else if (formStep === 1 && roomState.invalid) {
-                      return;
-                    } else if (formStep === 2 && foodState.invalid) {
-                      return;
-                    } else if (formStep === 3 && qualityState.invalid) {
-                      return;
-                    }
                     setFormStep(formStep + 1);
                   }}
                   type="button"
@@ -236,6 +219,24 @@ const CardSurvey = () => {
                   next
                 </Button>
                 <Button
+                  onClick={() => {
+                    form.trigger(['name', 'room', 'food', 'quality']);
+                    const nameState = form.getFieldState('name');
+                    const roomState = form.getFieldState('room');
+                    const foodState = form.getFieldState('food');
+                    const qualityState = form.getFieldState('quality');
+                    if (
+                      nameState.invalid ||
+                      roomState.invalid ||
+                      foodState.invalid ||
+                      qualityState.invalid
+                    ) {
+                      return toast({
+                        title: 'you should fill out all the fields',
+                        variant: 'destructive',
+                      });
+                    }
+                  }}
                   className={cn('', {
                     hidden: formStep !== 3,
                   })}
