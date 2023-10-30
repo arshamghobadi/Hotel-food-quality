@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -34,9 +34,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import { getFoodList } from '@/services';
 type Input = z.infer<typeof survaySchema>;
 
 const CardSurvey = () => {
+  useEffect(() => {
+    getFoodList_();
+  }, []);
+  const getFoodList_ = async () => {
+    const result = await getFoodList();
+    console.log(result);
+  };
   const [formStep, setFormStep] = useState(0);
   const router = useRouter();
   const { toast } = useToast();
