@@ -1,5 +1,5 @@
 'use client';
-import { MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Person } from '@/people';
 import { ColumnDef } from '@tanstack/react-table';
@@ -14,7 +14,19 @@ import {
 
 export const column: ColumnDef<Person>[] = [
   {
-    header: 'Person ID',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => {
+            column.toggleSorting(column.getIsSorted() === 'asc');
+          }}
+        >
+          Person ID
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     accessorKey: 'id',
   },
   {
@@ -22,7 +34,19 @@ export const column: ColumnDef<Person>[] = [
     accessorKey: 'first_name',
   },
   {
-    header: 'Room number',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => {
+            column.toggleSorting(column.getIsSorted() === 'asc');
+          }}
+        >
+          Room Number
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     accessorKey: 'room',
   },
   {
