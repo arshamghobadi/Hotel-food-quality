@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 import { getFoodList } from '@/services';
 import Cards from './Cards';
-import Kir from './Kir';
 
 const CardSurvey = () => {
   const [foodList, setFoodList] = useState<any>([]);
