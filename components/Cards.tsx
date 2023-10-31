@@ -38,18 +38,8 @@ import { useState } from 'react';
 type Input = z.infer<typeof survaySchema>;
 interface FoodListProps {
   foodList: any;
-  breakfast?: boolean;
-  lunch?: boolean;
-  dinner?: boolean;
 }
-const Cards: React.FC<FoodListProps> = ({
-  foodList,
-  breakfast,
-  lunch,
-  dinner,
-}) => {
-  console.log(foodList);
-
+const Cards: React.FC<FoodListProps> = ({ foodList }) => {
   const [formStep, setFormStep] = useState(0);
   const router = useRouter();
   const { toast } = useToast();
@@ -77,17 +67,17 @@ const Cards: React.FC<FoodListProps> = ({
     <div>
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>
-            {breakfast && 'Breakfast'}
-            {lunch && 'Lunch'}
-            {dinner && 'Dinner'}
-          </CardTitle>
+          <CardTitle>{foodList.title}</CardTitle>
 
-          <CardDescription>Please complete the survey</CardDescription>
+          <CardDescription>
+            Please complete the survey for {foodList.title}
+          </CardDescription>
+          <CardDescription>{foodList.date}</CardDescription>
           <Image
+            className=" max-w-74 max-h-40"
             priority
-            src="/image/homepagepic.jpg"
-            alt="food pic"
+            src={foodList.image[0].url}
+            alt={foodList.name}
             width={300}
             height={150}
           />

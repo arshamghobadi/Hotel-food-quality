@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { getFoodList } from '@/services';
 import Cards from './Cards';
+import Kir from './Kir';
 
 const CardSurvey = () => {
   const [foodList, setFoodList] = useState<any>([]);
@@ -13,12 +14,13 @@ const CardSurvey = () => {
     const resultFood: any = await getFoodList();
     setFoodList(resultFood.foods);
   };
+  console.log(foodList);
 
   return (
     <div className="flex flex-col lg:flex-row lg:space-x-5 lg:items-center max-w-5xl   space-y-5">
-      <Cards foodList={foodList} breakfast={true} />
-      <Cards foodList={foodList} lunch={true} />
-      <Cards foodList={foodList} dinner={true} />
+      {foodList.map((foodItem: any) => (
+        <Cards key={foodItem.name} foodList={foodItem} />
+      ))}
     </div>
   );
 };
