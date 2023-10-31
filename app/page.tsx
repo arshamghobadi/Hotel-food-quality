@@ -9,7 +9,7 @@ export default async function Home() {
   const { userId }: { userId: string | null } = auth();
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       {userId && <CardSurvey />}
       {!userId && (
         <div className="flex flex-col space-y-3">

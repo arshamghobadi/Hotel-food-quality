@@ -22,11 +22,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Toaster />
           <Header />
-          <main className="container mx-auto">
-            <div className="flex items-center justify-center min-h-screen">
-              <div>{children}</div>
-            </div>
-          </main>
+          <main>{children}</main>
         </body>
       </html>
     </ClerkProvider>

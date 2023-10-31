@@ -15,7 +15,7 @@ const CardSurvey = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 md:flex-row mx-auto">
+    <div className="flex flex-col lg:flex-row lg:space-x-5 lg:items-center max-w-5xl   space-y-5">
       <Cards foodList={foodList} breakfast={true} />
       <Cards foodList={foodList} lunch={true} />
       <Cards foodList={foodList} dinner={true} />

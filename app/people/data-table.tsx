@@ -61,7 +61,7 @@ export function PeopleDataTable<TData, TValue>({
     },
   });
   return (
-    <div>
+    <div className=" max-w-5xl mx-auto p-4">
       {/* {input for filter} */}
 
       <div className="flex items-center py-4">
