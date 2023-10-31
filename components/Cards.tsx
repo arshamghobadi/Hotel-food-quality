@@ -55,11 +55,19 @@ const Cards: React.FC<FoodListProps> = ({ foodList }) => {
 
   function onSubmit(data: Input) {
     toast({
-      title: 'Thanks for feedback',
+      title: 'Thanks for your feedback, you be able to submit for next 24 hour',
     });
     router.refresh();
     form.reset();
     setFormStep(0);
+    sessionStorage.setItem(
+      `formSubmitted${foodList.title}`,
+      `${foodList.title}`
+    );
+    const sessionTimeout = 24 * 60 * 60 * 1000;
+    setTimeout(() => {
+      sessionStorage.removeItem(`formSubmitted${foodList.title}`);
+    }, sessionTimeout);
     console.log(data);
   }
 
@@ -217,6 +225,12 @@ const Cards: React.FC<FoodListProps> = ({ foodList }) => {
                   back
                 </Button>
                 <Button
+                  disabled={
+                    sessionStorage.getItem(`formSubmitted${foodList.title}`) ===
+                    foodList.title
+                      ? true
+                      : false
+                  }
                   className={cn(`${formStep === 0 ? 'w-full' : ''}`, {
                     hidden: formStep === 3,
                   })}
