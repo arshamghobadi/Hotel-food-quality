@@ -1,11 +1,8 @@
-import React from 'react';
 import { PeopleDataTable } from './data-table';
 import { column } from './column';
 import { people } from '@/people';
 
-type Props = {};
-
-const PeoplePage = (props: Props) => {
+const PeoplePage = () => {
   return <PeopleDataTable columns={column} data={people} />;
 };
 
