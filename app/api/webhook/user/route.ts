@@ -48,7 +48,7 @@ async function handler(request: Request) {
     object: 'event';
     type: EventType;
   };
-  NextResponse.json({});
+  return NextResponse.json({});
 }
 
 export const GET = handler;
