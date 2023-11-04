@@ -13,10 +13,6 @@ model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   externalId  String    @unique
   attributes  Json
-  // name String?
-  // lastname String?
-  // Phone String?
-  // email String? @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -25,12 +21,12 @@ model User {
 
 model Survey {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
+  userId String?
   name String?
-  room Int
+  room String?
   food String?
   quality String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
   
 }

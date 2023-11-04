@@ -35,12 +35,14 @@ import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import axios from 'axios';
 type Input = z.infer<typeof survaySchema>;
 interface FoodListProps {
   foodList: any;
 }
 const Cards: React.FC<FoodListProps> = ({ foodList }) => {
   const [formStep, setFormStep] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<Input>({
@@ -54,6 +56,14 @@ const Cards: React.FC<FoodListProps> = ({ foodList }) => {
   });
 
   function onSubmit(data: Input) {
+    function onCreatesurvey() {
+      axios.post('/api/webhook/createsurvey', {
+        name: data.name,
+        room: data.room,
+        food: data.food,
+        qulity: data.quality,
+      });
+    }
     toast({
       title: 'Thanks for your feedback, you be able to submit for next 24 hour',
     });
@@ -68,9 +78,27 @@ const Cards: React.FC<FoodListProps> = ({ foodList }) => {
     setTimeout(() => {
       sessionStorage.removeItem(`formSubmitted${foodList.title}`);
     }, sessionTimeout);
+    onCreatesurvey();
     console.log(data);
   }
-
+  function fromTrigger() {
+    form.trigger(['name', 'room', 'food', 'quality']);
+    const nameState = form.getFieldState('name');
+    const roomState = form.getFieldState('room');
+    const foodState = form.getFieldState('food');
+    const qualityState = form.getFieldState('quality');
+    if (
+      nameState.invalid ||
+      roomState.invalid ||
+      foodState.invalid ||
+      qualityState.invalid
+    ) {
+      return toast({
+        title: 'you should fill out all the fields',
+        variant: 'destructive',
+      });
+    }
+  }
   return (
     <div>
       <Card className="w-[350px]">
@@ -242,24 +270,7 @@ const Cards: React.FC<FoodListProps> = ({ foodList }) => {
                   next
                 </Button>
                 <Button
-                  onClick={() => {
-                    form.trigger(['name', 'room', 'food', 'quality']);
-                    const nameState = form.getFieldState('name');
-                    const roomState = form.getFieldState('room');
-                    const foodState = form.getFieldState('food');
-                    const qualityState = form.getFieldState('quality');
-                    if (
-                      nameState.invalid ||
-                      roomState.invalid ||
-                      foodState.invalid ||
-                      qualityState.invalid
-                    ) {
-                      return toast({
-                        title: 'you should fill out all the fields',
-                        variant: 'destructive',
-                      });
-                    }
-                  }}
+                  onClick={fromTrigger}
                   className={cn('', {
                     hidden: formStep !== 3,
                   })}

@@ -26,6 +26,7 @@ export default async function Home() {
             </p>
           </div>
           <Image
+            className="p-3"
             priority
             src="/image/homepagepic.jpg"
             width={800}
