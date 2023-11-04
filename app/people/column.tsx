@@ -1,7 +1,7 @@
 'use client';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Person } from '@/people';
+
 import { ColumnDef } from '@tanstack/react-table';
 import {
   DropdownMenu,
@@ -11,7 +11,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
+type Person = {
+  id: string;
+  userId: string | null;
+  name: string | null;
+  room: string | null;
+  food: string | null;
+  quality: string | null;
+};
 export const column: ColumnDef<Person>[] = [
   {
     header: ({ column }) => {
@@ -31,7 +38,7 @@ export const column: ColumnDef<Person>[] = [
   },
   {
     header: 'User Name',
-    accessorKey: 'first_name',
+    accessorKey: 'name',
   },
   {
     header: ({ column }) => {

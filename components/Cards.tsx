@@ -61,7 +61,7 @@ const Cards: React.FC<FoodListProps> = ({ foodList }) => {
         name: data.name,
         room: data.room,
         food: data.food,
-        qulity: data.quality,
+        quality: data.quality,
       });
     }
     toast({
