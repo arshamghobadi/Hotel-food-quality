@@ -11,7 +11,13 @@ const Header = async () => {
       className="w-full max-w-5xl mx-auto  px-6 flex
       items-center justify-between mb-5"
     >
-      <Image src="/image/logo.jpg" alt="logo" width={100} height={50} />
+      <Image
+        priority
+        src="/image/logo.jpg"
+        alt="logo"
+        width={100}
+        height={50}
+      />
       <div className="flex items-center space-x-3 text-yellow-50">
         <UserButton afterSignOutUrl="/" />
         <div className="text-black">{user?.firstName}</div>
