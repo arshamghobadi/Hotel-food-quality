@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import Image from 'next/image';
 
 import {
@@ -17,11 +16,6 @@ import { Search } from './components/search';
 import TeamSwitcher from './components/team-switcher';
 import { UserNav } from './components/user-nav';
 import { Button } from '@/components/ui/button';
-
-export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'Example dashboard app built using the components.',
-};
 
 export default function DashboardPage() {
   return (
@@ -64,6 +58,7 @@ export default function DashboardPage() {
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
+
               <TabsTrigger value="analytics" disabled>
                 Analytics
               </TabsTrigger>
