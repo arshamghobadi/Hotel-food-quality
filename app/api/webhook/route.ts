@@ -50,3 +50,7 @@ type Event = {
 type NextApiRequestWithSvixRequiredHeaders = NextApiRequest & {
   headers: IncomingHttpHeaders & WebhookRequiredHeaders;
 };
+
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
