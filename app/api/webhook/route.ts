@@ -1,3 +1,4 @@
+import prisma from '../../../lib/prismadb';
 import type { IncomingHttpHeaders } from 'http';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { WebhookRequiredHeaders } from 'svix';
