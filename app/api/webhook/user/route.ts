@@ -3,10 +3,15 @@ import { IncomingHttpHeaders } from 'http';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { Webhook, WebhookRequiredHeaders } from 'svix';
-
+import { buffer } from 'micro';
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 const webhookSecret = process.env.WEBHOOK_SECRET || '';
-async function handler(request: Request) {
-  const payload = await request.json();
+async function handler(request: any, response: any) {
+  const payload = (await buffer(request)).toString();
   const headersList = headers();
   const heads = {
     'svix-id': headersList.get('svix-id'),
@@ -48,7 +53,7 @@ async function handler(request: Request) {
     object: 'event';
     type: EventType;
   };
-  return NextResponse.json({});
+  return NextResponse.json({}, response);
 }
 
 export const GET = handler;
